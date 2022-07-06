@@ -9,14 +9,13 @@ import {
   Keyboard,
   FlatList,
   SafeAreaView,
-  TouchableOpacity,
 } from 'react-native';
 import File from '../components/File';
 import FileInputModal from '../components/FileInputModal';
 import NotFound from '../components/NotFound';
 import RoundIconBtn from '../components/RoundIconBtn';
 import SearchBar from '../components/SearchBar';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons';
 import { useFiles } from '../contexts/FileProvider';
 import colors from '../misc/colors';
 import Welcome from './Welcome';
@@ -64,7 +63,6 @@ const FileScreen = ({ user, navigation }) => {
     navigation.navigate('FileDetail', { file });
   };
 
-
   const handleOnSearchInput = async text => {
     setSearchQuery(text);
     if (!text.trim()) {
@@ -91,6 +89,11 @@ const FileScreen = ({ user, navigation }) => {
     await findFiles();
   };
 
+  const clearAsync = async () => {
+    await AsyncStorage.clear();
+  }
+
+
     return (
     <>
       <StatusBar barStyle='dark-content' backgroundColor={colors.LIGHT} />
@@ -107,8 +110,12 @@ const FileScreen = ({ user, navigation }) => {
             borderColor: '#6D8B74'
           }}>
           </View>
+          
+          <View style={{flexDirection:'row',}}>
+            <Text style={styles.searchText}>Search for files below:</Text>
+          </View>
+          
        
-          <Text style={styles.searchText}>Search Below:</Text>
           {files.length ? (
             <SearchBar
               value={searchQuery}
@@ -153,7 +160,6 @@ const FileScreen = ({ user, navigation }) => {
       <RoundIconBtn
         onPress={() => setModalVisible(true)}
         antIconName='plus'
-        style={styles.addBtn}
       />
       <FileInputModal
         visible={modalVisible}
@@ -164,6 +170,11 @@ const FileScreen = ({ user, navigation }) => {
         antIconName='user' 
         title = "Dev" 
         onPress={() => navigation.navigate('DevScreens')} 
+      />
+      <RoundIconBtn 
+        antIconName='delete' 
+        title = "Clear" 
+        onPress={clearAsync} 
       />
 
       </View> 
@@ -207,12 +218,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: -1,
-  },
-  addBtn: {
-    position: 'absolute',
-    right: 15,
-    bottom: 50,
-    zIndex: 1,
   },
   searchText: {
     fontSize: 20,

@@ -5,6 +5,7 @@ import RoundIconBtn from './RoundIconBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFiles } from '../contexts/FileProvider';
 import FileInputModal from './FileInputModal';
+import Audio from '../components/AudioRecording';
 
 const formatDate = ms => {
   const date = new Date(ms);
@@ -18,7 +19,7 @@ const formatDate = ms => {
   return `${month}/${day}/${year} - ${hrs}:${min}:${sec}`;
 };
 
-const FileDetail = props => {
+const FileDetail = (props) => {
   const [file, setFile] = useState(props.route.params.file);
   const { setFiles } = useFiles();
   const [showModal, setShowModal] = useState(false);
@@ -83,6 +84,10 @@ const FileDetail = props => {
     setShowModal(true);
   };
 
+  const goToRecording = () => {
+    props.navigation.navigate('AudioRecording')
+  }
+
   return (
     <>
       <ScrollView
@@ -95,7 +100,8 @@ const FileDetail = props => {
             : `Created At ${formatDate(file.time)}`}
         </Text>
         <Text style={styles.title}>{file.title}</Text>
-        <Text style={styles.composer}>{file.composer}</Text>
+        <Text style={styles.composer}>Composer: {file.composer}</Text>
+        <Text style={styles.descTitle}>Description:</Text> 
         <Text style={styles.desc}>{file.desc}</Text>
       </SafeAreaView>
       </ScrollView>
@@ -114,6 +120,7 @@ const FileDetail = props => {
         <RoundIconBtn 
           antIconName='videocamera'
           style={{ backgroundColor: '#B4E197'}}
+          onPress={goToRecording}
         />
       </View>
       <FileInputModal
@@ -139,7 +146,14 @@ const styles = StyleSheet.create({
   },
   composer:{
     fontSize: 20,
-    opacity: 0.6,
+    color: colors.PRIMARY,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  descTitle:{
+    fontSize: 20,
+    color: '#6D8B74',
+    fontWeight: 'bold',
   },
   desc: {
     fontSize: 20,

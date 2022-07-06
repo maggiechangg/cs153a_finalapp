@@ -13,7 +13,7 @@ const File = ({ item, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text style={styles.title} numberOfLines={2}>{title}</Text>
-      <Text numberOfLines={1}>{composer}</Text>
+      <Text numberOfLines={1}  style={{color: colors.LIGHT, fontWeight: 'bold'}}>{composer}</Text>
       <Text numberOfLines={2}>{desc}</Text>
     </TouchableOpacity>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: colors.LIGHT,
+    color: '#FCF9C6'
   },
 });
 

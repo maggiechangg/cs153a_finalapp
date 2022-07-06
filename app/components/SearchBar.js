@@ -12,6 +12,7 @@ const SearchBar = ({ containerStyle, value, onClear, onChangeText }) => {
         style={styles.searchBar}
         placeholder='Search here..'
       />
+      
       {value ? (
         <AntDesign
           name='close'

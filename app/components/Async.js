@@ -45,6 +45,7 @@ export default function App() {
             <Stack.Screen component={RenderFileScreen} name='FileScreen' />
             <Stack.Screen component={FileDetail} name='FileDetail' />
             <Stack.Screen component={Bio} name="Bio" />
+            <Stack.Screen component={Audio} name="AudioRecording" />
             <Stack.Screen component={DevScreens} name="DevScreens" />
         </Stack.Navigator>
       </FileProvider>

@@ -8,14 +8,12 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  TouchableOpacity,
   SafeAreaView, 
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import colors from '../misc/colors';
 import RoundIconBtn from './RoundIconBtn';
-import { Ionicons } from '@expo/vector-icons';
-
 
 const FileInputModal = ({ visible, onClose, onSubmit, file, isEdit }) => {
   const [title, setTitle] = useState('');
@@ -86,41 +84,46 @@ const FileInputModal = ({ visible, onClose, onSubmit, file, isEdit }) => {
                 ) : null}
             </SafeAreaView>
 
-          <View style={{
-            borderStyle: 'dashed',
-            borderWidth: 2,
-            borderRadius: 10,
-            borderColor: '#6D8B74',
-            marginBottom: 20,
-            marginTop: 20,
-          }}>
-          </View>
-          <ScrollView>
-          <Text style={styles.inputText}>File Name:</Text>
-          <TextInput
-            value={title}
-            onChangeText={text => handleOnChangeText(text, 'title')}
-            style={[styles.input, styles.title]}
-          />
-          <Text style={styles.inputText}>Composer:</Text> 
-          <TextInput
-            value={composer}
-            onChangeText={text => handleOnChangeText(text, 'composer')}
-            style={[styles.input, styles.composer]}
-          />
-          
-          <Text style={styles.inputText}>Description:</Text> 
-          <TextInput
-            value={desc}
-            multiline
-            style={[styles.input, styles.desc]}
-            onChangeText={text => handleOnChangeText(text, 'desc')}
-          />
-          </ScrollView>
-        </SafeAreaView>
-        <TouchableWithoutFeedback onPress={handleModalClose}>
-          <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
-        </TouchableWithoutFeedback>
+            <View style={{
+              borderStyle: 'dashed',
+              borderWidth: 2,
+              borderRadius: 10,
+              borderColor: '#6D8B74',
+              marginBottom: 20,
+              marginTop: 20,
+            }}>
+            </View>
+              <ScrollView> 
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}
+              >
+              <Text style={styles.inputText}>File Name:</Text>
+              <TextInput
+                value={title}
+                onChangeText={text => handleOnChangeText(text, 'title')}
+                style={[styles.input, styles.title]}
+              />
+              <Text style={styles.inputText}>Composer:</Text> 
+              <TextInput
+                value={composer}
+                onChangeText={text => handleOnChangeText(text, 'composer')}
+                style={[styles.input, styles.composer]}
+              />
+              
+              <Text style={styles.inputText}>Description:</Text> 
+              <TextInput
+                value={desc}
+                multiline
+                style={[styles.input, styles.desc]}
+                onChangeText={text => handleOnChangeText(text, 'desc')}
+              />
+              </KeyboardAvoidingView>
+              </ScrollView>
+          </SafeAreaView>
+          <TouchableWithoutFeedback onPress={handleModalClose}>
+            <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
+          </TouchableWithoutFeedback>
       </Modal>
       
     </>
@@ -132,6 +135,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 15,
     backgroundColor: '#E9EFC0',
+    flex: 1,
   },
   firstLine:{
     fontSize: 20,

@@ -117,7 +117,8 @@ const Bio = () => {
         borderWidth: 5,
         borderColor: '#bca86e',
         borderRadius:5,
-        margin: 'auto',
+        marginLeft:'auto',
+        marginRight:'auto',
       }
     });
 export default Bio;

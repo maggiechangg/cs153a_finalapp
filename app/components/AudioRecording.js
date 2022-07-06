@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
     lineHeight: 80,
     backgroundColor: "#6D8B74",
     color: "white",
+    width: 200,
+    marginTop: 80,
+
   },
 
 });
