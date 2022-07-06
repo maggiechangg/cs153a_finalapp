@@ -35,7 +35,7 @@ const Welcome = ({ onFinish, navigation }) => {
       <StatusBar hidden />
       <SafeAreaView style={styles.container}>
         
-        <Text style={styles.text}>Welcome to Sapling</Text>
+        <Text style={styles.text}>Welcome to Sapling Test</Text>
         
         <Image 
           source={image} 
